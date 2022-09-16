@@ -1,22 +1,14 @@
-from contextlib import redirect_stderr
 from turtle import title
+from app import app
+from app.forms import RSVPForm
 from flask import flash, redirect, render_template, url_for, request
-from pkg_resources import register_finder
-from app import app, db
-from app.forms import EditProfileForm, LoginForm, RegistrationForm, EmptyForm, PostForm
-from app.models import User, Post
-from werkzeug.urls import url_parse
-from datetime import datetime
 
-@app.route('/', methods = ['GET', 'POST'])
-@app.route('/index', methods = ['GET', 'POST'])
-@login_required
+@app.route('/')
+@app.route('/index')
 def index():
+    return render_template('index.html', title='Home')
+
+@app.route('/rsvp', methods=['GET', 'POST'])
+def rsvp():
     form = RSVPForm()
-    if form.validate_on_submit():
-        guest = Guest(name = form.post.data, 
-                      author = current_user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post is now live!')
-        return redirect(url_for('index'))
+    return render_template('rsvp.html', title = "RSVP", form = form)
