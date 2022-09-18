@@ -1,11 +1,44 @@
 {% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block content %}
-    <h1>RSVP</h1>
-    <div class="row">
-        <div class="col-md-4">
-            {{ wtf.quick_form(form) }}
+    
+<div class="container py=4">
+    <h1 class="display-3 text-danger text-center">RSVP</h1>
+
+    <form class ="form-group" method="POST" action="{{ url_for('rsvp') }}">
+        <div class="form-group">
+            {{ form.hidden_tag() }}
+            <br>
+            <div>
+                {{ form.attending.label(class='form-control-label', for='attending') }}
+                {{ form.attending(id='attending') }}
+            </div>        
+            <br>    
+            <div class="form-group">
+                {{ form.name.label(class='form-control-label', for='name') }}
+                {{ form.name(placeholder='Full name', class='form-control', id='name') }}
+            </div>
+            <br>
+            <div class="form-group">
+                {{ form.email.label(class='form-control-label', for='email') }}
+                {{ form.email(placeholder='Email', class='form-control', id='email') }}
+            </div>
+            <br>
+            <div class="form-group">
+                {{ form.phone.label(class='form-control-label', for='phone') }}
+                {{ form.phone(placeholder='Phone number', class='form-control', id='phone') }}
+            </div>
+            <br>
+            <div class="form-group">
+                {{ form.message.label(class='form-control-label', for='message') }}
+                {{ form.message(placeholder='An additional message', class='form-control', id='message') }}
+            </div>
+            <br>
+            <div class="form-group">
+                {{ form.submit(class="btn-sm btn-primary form-control ")  }}
+            </div>
+
         </div>
-    </div>
+    </form>
+</div>
 {% endblock %}
