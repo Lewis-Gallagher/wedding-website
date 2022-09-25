@@ -1,0 +1,36 @@
+
+body {
+    color:#AD9463;
+    background:#0b4163;
+    font-size: 130%;
+    font-family: "Optima","Verdana";
+}
+
+.invite-content {
+    background:#2f5563;
+    padding:10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin: auto;
+    border-style: double;
+    padding: 2%;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    border-style: double;
+    padding: 2%;
+  }
+
+shadow {
+    box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07)
+  ;}
