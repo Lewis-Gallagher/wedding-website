@@ -1,7 +1,8 @@
 
 body {
+    background-image: url("images/background.jpeg");
+    background-size: 75%;
     color:#AD9463;
-    background:#0b4163;
     font-size: 130%;
     font-family: "Optima","Verdana";
 }

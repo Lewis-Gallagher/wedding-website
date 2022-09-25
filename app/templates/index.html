@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="center shadow" align="center">
-    <!-- https://www.fontspace.com/geraldine-font-f61160 -->
-    <img style="float: center; padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/savethedate.png') }}" align="middle", width="300">
-    <br>
+<div>
 
-    <img style="float: center; padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/lew_and_niki.jpeg') }}" align="middle", width="225">
-    <p>for the wedding of</p>
+    <div class="invite-content" align="center">
+        <!-- https://www.fontspace.com/geraldine-font-f61160 -->
+        <img style="padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/savethedate.png') }}", width="300">
+        <br>
 
-    <p>Nikita Patel <img style="float: center; padding: 0px 0px 0px 0px" src="{{ url_for('static', filename='images/ampersand.png') }}" align="middle", width="20"> Lewis Gallagher</p>
-    <hr>
-    <p>21.05.24</p>
+        <img style="padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/lew_and_niki.jpeg') }}", width="225">
+        <p>for the wedding of</p>
 
+        <p>Lewis Gallagher <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20"> Nikita Patel </p>
+        <hr>
+        <p>21.05.24</p>
+    </div>
 </div>
 {% endblock %}
