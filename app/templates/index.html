@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Welcome to Niki and Lewis' wedding!</h1>
+<div class="container-fluid" align="center">
+    <!-- https://www.fontspace.com/geraldine-font-f61160 -->
+    <img style="float: center; padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/savethedate.png') }}" align="middle", width="225">
+    <br>
+    <img style="float: center; padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/lew_and_niki.jpeg') }}" align="middle", width="225">
+    <p>for the wedding of</p>
+
+    <p>Nikita Patel <img style="float: center; padding: 0px 0px 0px 0px" src="{{ url_for('static', filename='images/ampersand.png') }}" align="middle", width="20"> Lewis Gallagher</p>
+    <p>21.05.24</p>
+
+</div>
 {% endblock %}
