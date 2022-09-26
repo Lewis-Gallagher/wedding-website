@@ -1,19 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
-
-    <div class="invite-content" align="center">
+<div style="padding:40px">
+    <div class="invite-content shadow" align="center">
         <!-- https://www.fontspace.com/geraldine-font-f61160 -->
         <img style="padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/savethedate.png') }}", width="300">
         <br>
 
-        <img style="padding: 20px 0px 20px 0px" src="{{ url_for('static', filename='images/lew_and_niki.jpeg') }}", width="225">
+        <img style="padding: 2px 2px 2px 2px; border-style: solid; border-width:1px" src="{{ url_for('static', filename='images/lew_and_niki.jpeg') }}", width="225">
+        <br>
+        <br>
         <p>for the wedding of</p>
 
-        <p>Lewis Gallagher <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20"> Nikita Patel </p>
+        <p>Lewis Gallagher <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20"> Nikita Patel</p>
         <hr>
         <p>21.05.24</p>
+        <hr>
+        <p>Formal invitations and further information to follow.</p>
     </div>
 </div>
 {% endblock %}
