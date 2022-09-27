@@ -8,6 +8,20 @@ body {
     letter-spacing: 0.2em;
 }
 
+.photo-base {
+    padding: 20px 20px;
+}
+
+.nav-base {
+    background:#2f5563;
+    color:#AD9463;
+    font-size: 90%;
+    font-family: "Optima","Verdana","Arial", sans-serif;
+    letter-spacing: 0.2em;
+    border-style: ridge;
+    border-top: 3px;
+}
+
 .invite-content {
     background:#2f5563;
     display: block;
@@ -18,6 +32,13 @@ body {
     border-style: double;
     border-width: 7px;
     padding: 2%;
+}
+
+checkbox {
+    background-color: transparent;
+    color:inherit;
+    border-style: none;
+    background:rgba(0, 0, 0, 0.00)
 }
 
 shadow {
