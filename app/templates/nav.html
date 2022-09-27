@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-transparent">
+<nav class="navbar navbar-expand-lg nav-base">
     <div class="container">
       <a class="navbar-brand"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,11 +9,19 @@
         <ul class="navbar-nav mx-auto">
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('index') }}" style="color:gold">Home</a>
+            <a class="nav-link" href="{{ url_for('index') }}" style="color:#AD9463">Home</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('rsvp') }}" style="color:gold">RSVP</a>
+            <a class="nav-link" href="{{ url_for('rsvp') }}" style="color:#AD9463">RSVP</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('our_story') }}" style="color:#AD9463">Our Story</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('event_info') }}" style="color:#AD9463">Event Info</a>
           </li>
 
         </ul>
