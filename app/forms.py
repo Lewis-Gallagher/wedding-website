@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, TelField, RadioField, widgets, SelectMultipleField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
+from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length, StopValidation
 
 class MultiCheckboxField(SelectMultipleField):
     """
@@ -11,11 +11,22 @@ class MultiCheckboxField(SelectMultipleField):
     option_widget = widgets.CheckboxInput()
 
 
+class MultiCheckboxAtLeastOne():
+    def __init__(self, message=None):
+        if not message:
+            message = 'At least one option must be selected.'
+        self.message = message
+
+    def __call__(self, form, field):
+        if len(field.data) == 0:
+            raise StopValidation(self.message)
+
+
 class RSVPForm(FlaskForm):
     attending = RadioField(
         label = "Will you be attending?",
         validators = [DataRequired()],
-        choices = ["Yes, I will be attending.", "No, I will not be attending."]
+        choices = [(1, "Yes, I will be attending."), (0, "No, I will not be attending.")]
         )
     name = StringField(
         label = 'Full Name', 
@@ -30,10 +41,14 @@ class RSVPForm(FlaskForm):
         validators = [DataRequired()]
         )
     diet_req = MultiCheckboxField( 
-        label = 'Dietary Requirements',
-        validators = [DataRequired()], 
-        choices = [(0, "None"), (1, "Vegetarian"), (2, "Vegan"), (3, "Nut allergies"), 
-                   (4, "Fish and shelfish allergies"), (5, "Other - Please specify")]
+        label = 'Dietary requirements', 
+        choices = [
+            (1, "Vegetarian"), 
+            (2, "Vegan"), 
+            (3, "Nut allergies"),
+            (4, "Fish and shelfish allergies"), 
+            (5, "Other - please specify below")
+            ]
         )
     message = TextAreaField(
         label = 'Message', 
