@@ -18,8 +18,15 @@ def rsvp():
             name = form.name.data,
             email = form.email.data,
             phone = form.phone.data,
+            diet_req = form.diet_req.data,
             message = form.message.data
         )
+        print(guest)
+
+        # If diet req is not None, turn the list into a concatenated string e.g. [1,3,5] into '135'
+        if guest.diet_req:
+            guest.diet_req = ''.join(map(str, guest.diet_req))
+
         db.session.add(guest)
         db.session.commit()
 
@@ -27,7 +34,7 @@ def rsvp():
         return redirect(url_for('index'))
     else:
         flash('There was a problem...')
-    return render_template('rsvp.html', title = "RSVP", form = form)
+        return render_template('rsvp.html', title = "RSVP", form = form)
 
 @app.route('/our-story')
 def our_story():
