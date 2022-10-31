@@ -16,14 +16,6 @@
 
     {%block content%}
     <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %} 
-            {% for message in messages %} 
-                <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %} 
-        {% endif %} 
-        {% endwith %} 
-    
         {# Application content needs to be provided in the app_content block #}
         {% block app_content %}{% endblock %} 
     </div>
@@ -34,6 +26,9 @@
     <footer id="footer">
         <div class="container" align="center">
             <img src="{{ url_for('static', filename='images/chibi.png') }}", width="10%">
+            <p style="color:white; font-size:10px">
+                Made with love by the groom.
+            </p>
         </div>
     </footer>
 </body>
