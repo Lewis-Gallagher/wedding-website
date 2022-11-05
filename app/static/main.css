@@ -27,11 +27,24 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 500px;
+    width: 90%;
     margin: auto;
     border-style: double;
     border-width: 7px;
     padding: 2%;
+}
+
+.flash {
+    background-color: #AD9463;
+    letter-spacing: normal;
+    font-size: 80%;
+    font-weight: bold;
+    color: #2f5563;
+    margin: auto;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    text-align: center;
+    width: 100%;
 }
 
 checkbox {
