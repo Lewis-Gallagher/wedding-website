@@ -2,12 +2,18 @@
 body {
     background-image: url("images/background.jpeg");
     background-size: 75%;
+    background-color: #2f5563;
     color:#AD9463;
-    font-size: 120%;
+    font-size: 130%;
     font-family: "Optima","Verdana","Arial", sans-serif;
     letter-spacing: 0.2em;
 }
 
+a{
+    color:inherit;
+    text-decoration: none;
+    font-weight: bold;
+}
 .photo-base {
     padding: 20px 20px;
 }
@@ -28,6 +34,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 90%;
+    height: 90%;
     margin: auto;
     border-style: double;
     border-width: 7px;
