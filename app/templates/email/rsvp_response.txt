@@ -1,0 +1,15 @@
+Dear {{ guest.name }},
+
+Thank you so much for your RSVP to our wedding. {% if attending %}We look forwrad to welcoming you to our special day. See you in May!{% else %}We're sorry you can't make it! But we know you'll be celebrating with us from afar and we hope to see you soon.{% endif %}
+
+Feel free to return to the wedding website at [ nplg.wedding.com ] for further information on the venue, hotel information and timings. Feel free to email us at <a target=_blank href="mailto:nplg.wedding@gmail.com">nplg.wedding@gmail.com</a> if you have any questions.
+
+Best wishes,
+Lewis and Niki
+
+
+{% if guest.message %}
+Below is the message that you sent us:
+------------------------
+{{ guest.message }}
+{% endif %}

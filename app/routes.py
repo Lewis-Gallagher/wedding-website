@@ -1,7 +1,9 @@
+import os
 from turtle import title
 from app import app, db
 from app.forms import RSVPForm
 from app.models import Guest
+from app.email import send_email_rsvp
 from flask import flash, redirect, render_template, url_for, request
 
 @app.route('/')
@@ -28,10 +30,14 @@ def rsvp():
         else:
             guest.diet_req = None
 
+        # Send confirmation email of a sucessfull RSVP
+        send_email_rsvp(guest)
+        flash('Thank you! You have successfully submitted your RSVP. You will shortly receive a confirmation email.')
         db.session.add(guest)
         db.session.commit()
 
-        flash('Thank you! You have successfully submitted your RSVP. You will shortly receive a confirmation email.')
+
+
         return redirect(url_for('index'))
 
     return render_template('rsvp.html', title = "RSVP", form = form)
