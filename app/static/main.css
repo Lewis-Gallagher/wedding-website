@@ -6,14 +6,8 @@ body {
     color:#AD9463;
     font-size: 130%;
     font-family: "Optima","Verdana","Arial", sans-serif;
-    letter-spacing: 0.2em;
 }
 
-a{
-    color:inherit;
-    text-decoration: none;
-    font-weight: bold;
-}
 .photo-base {
     padding: 20px 20px;
 }
@@ -28,6 +22,27 @@ a{
     border-top: 3px;
 }
 
+.nav-base li {
+    margin-right: 40px;
+    list-style: none;
+    text-decoration: none;
+    display: inline;
+ }
+
+.card {
+    background:#2f5563;
+    display: block;
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    border-style: double;
+    border-width: 7px;
+    border-radius: 0%;
+    border-color: #AD9463;
+    padding: 5%;
+    letter-spacing: 0em;
+}
+
 .invite-content {
     background:#2f5563;
     display: block;
@@ -38,14 +53,14 @@ a{
     margin: auto;
     border-style: double;
     border-width: 7px;
-    padding: 2%;
+    padding: 5%;
+    letter-spacing: 0.2em;
 }
 
 .flash {
     background-color: #AD9463;
     letter-spacing: normal;
     font-size: 80%;
-    font-weight: bold;
     color: #2f5563;
     margin: auto;
     margin-top: 1%;

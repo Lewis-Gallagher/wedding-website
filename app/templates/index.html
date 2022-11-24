@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="padding:40px">
+<div class="container" style="padding: 40px">
     <div class="invite-content shadow" align="center">
         <!-- https://www.fontspace.com/geraldine-font-f61160 -->
         <img class="photo-base" src="{{ url_for('static', filename='images/savethedate.png') }}", width="40%">
@@ -10,13 +10,22 @@
         <img style="border-style: ridge; border-width:3px" src="{{ url_for('static', filename='images/lew_and_niki.jpeg') }}", width="33%">
         <br>
         <br>
-        <p>for the wedding of</p>
+        <p>
+            for the wedding of
+        </p>
 
-        <p>Lewis Gallagher <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20"> Nikita Patel</p>
+        <p>
+            Lewis Gallagher <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20"> Nikita Patel
+        </p>
         <hr>
-        <p>21.05.24</p>
+        <p>
+            31.05.24<br>
+            The Atlantica Beach Resort, Kos
+        </p>
         <hr>
-        <p>Formal invitations and further information to follow.</p>
+        <p>
+            Formal invitations and further information to follow.
+        </p>
     </div>
 </div>
 {% endblock %}

@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg nav-base">
-    <div class="container">
+<nav class="navbar sticky-top navbar-expand-lg nav-base">
+    <div class="container-fluid">
       <a class="navbar-brand"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -22,6 +22,10 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('event_info') }}" style="color:#AD9463">Event Info</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('faq') }}" style="color:#AD9463">FAQ</a>
           </li>
 
         </ul>
