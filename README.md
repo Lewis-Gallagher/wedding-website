@@ -1,30 +1,29 @@
 # wedding-website
 A Python Flask app for our wedding
 
----
-##Pages
+## Pages
 ---
 1. Home/Landing Page
 2. RSVP Form
-3. Travel and Hotel Suggestions
-4. The Story So Far
-5. Contact Us
+3. FAQ
+4. Event Info
+5. The Story So Far
+6. Contact Us
 
-###Home Page
----
-* Engagement photo reel
-* Welcome message and link to RSVP form
+### Home Page
+* Invite Card
 
-###RSVP Form
----
-####Form fields
-1. Name(s) of atendees
+### RSVP Form
+#### Form fields:
+1. Name of atendee
 2. Contact email
 3. Contact phone number
 4. For each guest: Dietary requirements/allergies
 5. Additional message to send at the end which will be emailed to an admin.
 6. Submit
 
-####Form Features
-* Names should be unique entries in the database
-* Forms should be able to be edited after submission if they get something wrong
+#### Form Features
+* Emails should be unique entries in the database
+* Shows flashed message on success or error
+
+
