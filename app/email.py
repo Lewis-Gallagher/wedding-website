@@ -12,12 +12,11 @@ def send_email(subject, from_email, to_emails, text_body, html_body):
                html_content = html_body
                )
 
-    sg = SendGridAPIClient(os.environ["SENDGRID_API_KEY"])
+    sg = SendGridAPIClient(api_key=os.environ['SENDGRID_API_KEY'])
     response = sg.send(msg)
     print(response.status_code)
     print(response.body)
     print(response.headers)
-
 
 def send_email_rsvp(guest):
     subject = 'Wedding RSVP - Thank you for your RSVP!'

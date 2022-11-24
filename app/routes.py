@@ -31,12 +31,14 @@ def rsvp():
             guest.diet_req = None
 
         # Send confirmation email of a sucessfull RSVP
-        send_email_rsvp(guest)
-        flash('Thank you! You have successfully submitted your RSVP. You will shortly receive a confirmation email.')
-        db.session.add(guest)
-        db.session.commit()
-
-
+        try:
+            send_email_rsvp(guest)
+        except Exception as err:
+            flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact nplg.wedding@gmail.com - {err}', 'error')
+        else:
+            # db.session.add(guest)
+            # db.session.commit()
+            flash(f'Thank you! You RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email}.', 'message')
 
         return redirect(url_for('index'))
 
@@ -51,3 +53,7 @@ def our_story():
 @app.route('/event-info')
 def event_info():
     return render_template('event_info.html', title = "Event Info")
+
+@app.route('/faq')
+def faq():
+    return render_template('faq.html', title = "FAQ")
