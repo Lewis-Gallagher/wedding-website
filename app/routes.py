@@ -34,7 +34,7 @@ def rsvp():
         try:
             send_email_rsvp(guest)
         except Exception as err:
-            flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact nplg.wedding@gmail.com - {err}', 'error')
+            flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {os.environ["MAIL_DEFAULT_SENDER"]} - {err}', 'error')
         else:
             # db.session.add(guest)
             # db.session.commit()
