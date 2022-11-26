@@ -36,3 +36,15 @@ def send_email_rsvp(guest, admins):
             to_emails = recipients,
             text_body = text_body,
             html_body = html_body)
+
+
+def send_error_email(traceback, admins):
+    subject = '[wedding-wesbite] - An unexpected error has occured'
+    sender = os.environ['MAIL_DEFAULT_SENDER']
+    recipients = admins
+    text_body = render_template(traceback)
+
+    send_email(subject = subject,
+            from_email = sender,
+            to_emails = recipients,
+            text_body = text_body)

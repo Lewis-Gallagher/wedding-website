@@ -1,10 +1,10 @@
 import os
-from turtle import title
-from app import app, db
+from app import app, db, errors
 from app.forms import RSVPForm
 from app.models import Guest
 from app.email import send_email_rsvp
-from flask import flash, redirect, render_template, url_for, request
+from flask import flash, redirect, render_template, url_for
+
 
 @app.route('/')
 @app.route('/index')
@@ -24,7 +24,7 @@ def rsvp():
             message = form.message.data
         )
 
-        # If guest has diet_req, turn the list into a concatenated string e.g. [1,3,5] into '135' otherwise None
+        # If guest has diet_req, turn the list into a concatenated string e.g. [1,3,5] into '135' otherwise None. SqlAlchemy doesn't allow list types.
         if guest.diet_req:
             guest.diet_req = ''.join(map(str, guest.diet_req))
         else:
@@ -34,10 +34,11 @@ def rsvp():
         try:
             send_email_rsvp(guest, app.config['ADMINS'])
         except Exception as err:
-            flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {os.environ["MAIL_DEFAULT_SENDER"]} - {err}', 'error')
+            flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {app.config["ADMINS"][0]} - {err}', 'error')
+            db.session.rollback()
         else:
-            # db.session.add(guest)
-            # db.session.commit()
+            db.session.add(guest)
+            db.session.commit()
             flash(f'Thank you! You RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email}.', 'message')
 
         return redirect(url_for('index'))
@@ -47,13 +48,15 @@ def rsvp():
 
 @app.route('/our-story')
 def our_story():
-    return render_template('our_story.html', title = "Our Story")
-
+    return render_template('our_story.html', title = 'Our Story')
 
 @app.route('/event-info')
 def event_info():
-    return render_template('event_info.html', title = "Event Info")
+    return render_template('event_info.html', title = 'Event Info')
 
 @app.route('/faq')
 def faq():
-    return render_template('faq.html', title = "FAQ")
+    return render_template('faq.html', title = 'FAQ')
+
+
+
