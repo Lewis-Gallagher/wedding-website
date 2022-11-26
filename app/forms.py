@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, TelField, RadioField, widgets, SelectMultipleField
-from wtforms.validators import DataRequired, Email, Length, Optional
-
+from wtforms.validators import DataRequired, Email, Length, Optional, ValidationError
+from app.models import Guest
 
 class MultiCheckboxField(SelectMultipleField):
     """
@@ -53,3 +53,8 @@ class RSVPForm(FlaskForm):
         label = 'RSVP'
         )
     
+    def validate_email(self, email):
+        email = Guest.query.filter_by(email=email.data).first()
+        if email is not None:
+            message = 'An RSVP with this email has already been submitted.'
+            raise ValidationError(message)
