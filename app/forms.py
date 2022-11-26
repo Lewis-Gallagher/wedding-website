@@ -56,5 +56,11 @@ class RSVPForm(FlaskForm):
     def validate_email(self, email):
         email = Guest.query.filter_by(email=email.data).first()
         if email is not None:
-            message = 'An RSVP with this email has already been submitted.'
+            message = 'An RSVP under this email has already been submitted.'
+            raise ValidationError(message)
+
+    def validate_name(self, name):
+        name = Guest.query.filter_by(name=name.data).first()
+        if name is not None:
+            message = 'An RSVP under this name has already been submitted.'
             raise ValidationError(message)
