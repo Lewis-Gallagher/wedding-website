@@ -2,7 +2,8 @@ import os
 from flask import render_template
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-
+import app
+from config import Config
 
 def send_email(subject, from_email, to_emails, text_body, html_body):
     msg = Mail(from_email = from_email,
@@ -18,7 +19,7 @@ def send_email(subject, from_email, to_emails, text_body, html_body):
     print(response.body)
     print(response.headers)
 
-def send_email_rsvp(guest):
+def send_email_rsvp(guest, admins):
     """
     Creates an RSVP response email.
     Sends a confirmation email to the guest and to an admin email specified by ADMINS
@@ -26,7 +27,7 @@ def send_email_rsvp(guest):
     subject = 'Wedding RSVP - Thank you for your RSVP!'
     sender = os.environ['MAIL_DEFAULT_SENDER']
     recipients = [guest.email]
-    recipients.append(os.environ['ADMINS'])
+    recipients.extend(admins)
     text_body = render_template('email/rsvp_response.txt', guest = guest)
     html_body = render_template('email/rsvp_response.html', guest = guest)
 

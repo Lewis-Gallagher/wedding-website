@@ -32,7 +32,7 @@ def rsvp():
 
         # Send confirmation email of a sucessfull RSVP
         try:
-            send_email_rsvp(guest)
+            send_email_rsvp(guest, app.config['ADMINS'])
         except Exception as err:
             flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {os.environ["MAIL_DEFAULT_SENDER"]} - {err}', 'error')
         else:
