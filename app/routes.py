@@ -2,13 +2,17 @@ import os
 from app import app, db, errors
 from app.forms import RSVPForm
 from app.models import Guest
-from app.email import send_email_rsvp
+from app.email import send_email
 from flask import flash, redirect, render_template, url_for
 
+
+class BigBangException(Exception):
+    pass
 
 @app.route('/')
 @app.route('/index')
 def index():
+    raise BigBangException("BANG!")
     return render_template('index.html', title='Home')
 
 @app.route('/rsvp', methods=['GET', 'POST'])
@@ -32,7 +36,12 @@ def rsvp():
 
         # Send confirmation email of a sucessfull RSVP
         try:
-            send_email_rsvp(guest, app.config['ADMINS'])
+            send_email(
+                subject="LG NP Wedding RSVP confirmation",
+                to_emails = guest.email,
+                text_body = render_template('email/rsvp_response.txt', guest = guest),
+                html_body = render_template('email/rsvp_response.html', guest = guest)
+            )
         except Exception as err:
             flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {app.config["ADMINS"][0]} - {err}', 'error')
             db.session.rollback()
