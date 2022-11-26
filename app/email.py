@@ -19,9 +19,14 @@ def send_email(subject, from_email, to_emails, text_body, html_body):
     print(response.headers)
 
 def send_email_rsvp(guest):
+    """
+    Creates an RSVP response email.
+    Sends a confirmation email to the guest and to an admin email specified by ADMINS
+    """
     subject = 'Wedding RSVP - Thank you for your RSVP!'
     sender = os.environ['MAIL_DEFAULT_SENDER']
-    recipients = guest.email
+    recipients = [guest.email]
+    recipients.append(os.environ['ADMINS'])
     text_body = render_template('email/rsvp_response.txt', guest = guest)
     html_body = render_template('email/rsvp_response.html', guest = guest)
 
