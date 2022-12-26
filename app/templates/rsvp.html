@@ -5,9 +5,14 @@
 <div class="container" style="padding: 5%">
     <form class ="invite-content shadow" method="POST" action="{{ url_for('rsvp') }}" novalidate>
         <div align="center" style="padding: 2% 2%">
-            <img src="{{ url_for('static', filename='images/rsvp.png') }}" width=50%/>
+            <img src="{{ url_for('static', filename='images/rsvp.png') }}" width=40%/>
         </div>
-
+        <br>
+        <div align="center" style="letter-spacing:0em; font-size:90%">
+            <p>
+                Please submit one RSVP per person and ensure you submit your RSVP using the email address you were sent the invite via, to maintain continuity with our attendee information.
+            </p>
+        </div>
         <div class="form-group">
             {{ form.hidden_tag() }}
             <br>
@@ -62,6 +67,10 @@
             <div class="form-group">
                 {{ form.submit(class="btn-sm btn-primary form-control") }}
             </div>
+        </div>
+        <br>
+        <div align="center" style="letter-spacing:0em; font-size:90%">
+            <p>If you have any issues please contact lewis@nplgwedding.com.</p>
         </div>
     </form>
 </div>
