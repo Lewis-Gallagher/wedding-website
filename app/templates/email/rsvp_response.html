@@ -1,8 +1,8 @@
 <p>Dear {{ guest.name }},</p>
 
-<p>Thank you so much for your RSVP to our wedding. {% if guest.attending %}We look forwrad to welcoming you to our special day. See you in May!{% else %}We're sorry you can't make it! But we know you'll be celebrating with us from afar and we hope to see you soon.{% endif %}</p>
+<p>Thank you so much for your RSVP to our wedding. {% if guest.attending %}We look forwrad to welcoming you to our special day!{% else %}We're sorry you can't make it! But we know you'll be celebrating with us from afar and we hope to see you soon.{% endif %}</p>
 
-<p>Feel free to return to the wedding website at <a target=_blank href="nplg.wedding.com">nplg.wedding.com</a> for further information on the venue, hotel information and timings. Feel free to email us at lewis@nplgwedding.com if you have any questions.</p>
+<p>Feel free to return to the wedding website at <a target="_blank" href="nplg.wedding.com">nplg.wedding.com</a> for further information on the venue, hotel information and FAQs. Feel free to email us at lewis@nplgwedding.com if you have any questions.</p>
 
 <p>Best wishes,<br>
 Lewis and Niki</p>
@@ -16,7 +16,7 @@ Lewis and Niki</p>
 <p>Phone:<br>
 {{ guest.phone }}</p>
 <p>Dietary requirements:<br>
-{{ guest.diet_req }}</p>
+{{ diet_string }}</p>
 
 {% if guest.message %}
 <hr>
