@@ -5,7 +5,7 @@ from werkzeug.exceptions import InternalServerError
 import sendgrid
 from app.email import send_email
 
-sg = sendgrid.SendGridAPIClient(api_key=os.environ['SENDGRID_API_KEY'])
+sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
 
 # https://sendgrid.com/blog/custom-error-report-emails-for-python-flask-web-apps-with-twilio-sendgrid/
 
