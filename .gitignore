@@ -2,5 +2,7 @@
 __pycache__/
 .flaskenv
 app.db
-logs
-venv
+migrations/
+logs/
+venv/
+bak/
