@@ -1,7 +1,7 @@
 
 body {
     background-image: url("images/background.jpeg");
-    background-size: 75%;
+    background-size: 50%;
     background-color: #2f5563;
     color:#AD9463;
     font-size: 130%;
@@ -16,7 +16,6 @@ body {
     background:#2f5563;
     color:#AD9463;
     font-size: 90%;
-    font-family: "Optima","Verdana","Arial", sans-serif;
     letter-spacing: 0.2em;
     border-style: ridge;
     border-top: 3px;
