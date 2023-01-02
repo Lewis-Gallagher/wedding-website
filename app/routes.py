@@ -17,7 +17,7 @@ def rsvp():
 
     if form.validate_on_submit():
         guest = Guest(
-            attending = form.attending.data,
+            attending = int(form.attending.data),
             name = form.name.data,
             email = form.email.data,
             phone = form.phone.data,
@@ -57,7 +57,7 @@ def rsvp():
         else:
             db.session.add(guest)
             db.session.commit()
-            flash(f'Thank you! You RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email}.', 'message')
+            flash(f'Thank you! Your RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email}.', 'message')
 
         return redirect(url_for('index'))
 
