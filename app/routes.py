@@ -25,7 +25,6 @@ def rsvp():
             message = form.message.data
         )
 
-
         # Cast the chosen diet requirements into a string e.g. [1,3,4] -> '134'
         # also create an readable string for the email confirmation. e.g "vegetarian, nut allergies, fish allergies" in place of numbers.
         diet_dict = {

@@ -14,7 +14,6 @@ bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, ender_as_batch=True)
 
-
 # Set up logging to file.
 if not app.debug:
     if not os.path.exists('logs/'):
