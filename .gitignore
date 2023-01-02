@@ -6,3 +6,5 @@ migrations/
 logs/
 venv/
 bak/
+.backup
+.restore
