@@ -8,3 +8,4 @@ venv/
 bak/
 .backup
 .restore
+.env
