@@ -21,7 +21,7 @@ services:
             context: ./
             dockerfile: Dockerfile
         container_name: flask
-        command: gunicorn --bind 0.0.0.0:8000 --workers 4 --chdir /var/www/flask wedding-website:app
+        command: gunicorn --bind 0.0.0.0:8000 --workers 3 wedding-website:app
         restart: unless-stopped
         volumes:
             - ./:/var/www
