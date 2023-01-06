@@ -11,12 +11,15 @@ A Python Flask app for our wedding
 - [SQLite Database](#sqlite-database)
   - [Structure](#structure)
   - [Considerations](#considerations)
+  - [Backups](#backups)
 - [Web Service](#web-service)
   - [Docker Compose](#docker-compose)
     - [Run](#run)
     - [Logs](#logs)
     - [Monitoring](#monitoring)
     - [Restarting the Service](#restarting-the-service)
+    - [Environmental variables](#environmental-variables)
+- [To do](#to-do)
 
 # Website
 ## Pages
@@ -54,6 +57,7 @@ The database contains two tables: Invited and Guest. The Invited table contains 
 ## Considerations
 The flask forms are set up so an RSVP may only be submitted with an email address that exists in the Invited table. This is to ensure no uninvited guests may RSVP and also prevents me from having guests register with an email address and password. This is not the most secure option as one may easily RSVP with someone else's email address, however, I felt a user registration system would be unnecessary for an otherwise static and non-interactive website.
 
+## Backups
 Database backups are important to not erroneously lose attendee information. This is achieved manually every time the database is manually accessed by running the `sq3backup.sh` script: 
 ```bash
 . sq3backup.sh
@@ -75,7 +79,7 @@ The database can be restored with:
 I am using a Digital Ocean droplet to host the website. The droplet is running Ubuntu 20.04 and a small amount of set up is required to get things up and running. See droplet-setup.md.
 
 ## Docker Compose
-The source code is copied to the droplet by cloning this repository. The service consists of two images, the first is built from the `Dockerfile` in the project directory, which contains the source code for the app. The second pulls the nginx container from Dockerhub. 
+The service consists of two images. The first is built from the `Dockerfile` in the project directory, which contains the source code for the app. The second pulls the nginx container from Dockerhub. 
 
 ### Run
 From there the service is run with docker compose in detached mode (`-d`) from the project directory, containing the `docker-compose.yml` file:
@@ -100,3 +104,21 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED        S
 ```
 ### Restarting the Service
 The docker service will automatically attempt to restart unless it is explicitly stopped, via the `restart: unless-stopped` argument. So in the event of the droplet being rebooted, or the app crashing, the docker service will restart automatically wihtout the need for manual intervention.
+
+### Environmental variables
+The flask app requires a few environmental variables to be set including a secret key to use CSRF Flask-WTF forms and a SendGrid API key for emails, both of which should not be published publicly.
+
+A `.env` file should be created in the project directory in the following format
+```bash
+FLASK_APP=wedding-website.py
+SENDGRID_API_KEY="********"
+MAIL_DEFAULT_SENDER=lewis@nplgwedding.com
+SECRET_KEY="a-secret-key"
+```
+The flask service in the `docker-compose.yml` file will use the `env_file: .env` argument to assign any variables inside the `.env` file when the container is launched. 
+
+This isn't the most secure method, as anybody with root access to the droplet can inspect the container while it's running to view any set environmental variables. An alternative would be to use docker secrets, however this requires setting up docker as a swarm service.
+
+# To do
+1. TLS/SSL Certificate for HTTPS encryption.
+2. Mount persistant storage.
