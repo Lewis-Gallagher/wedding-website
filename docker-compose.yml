@@ -1,19 +1,33 @@
 version: '3.1'
 
 services:
+    certbot:
+        image: certbot/certbot
+        container_name: certbot
+        volumes: 
+            - ./certbot/conf:/etc/letsencrypt
+            - ./certbot/www:/var/www/certbot
+        command: certonly --webroot -w /var/www/certbot --force-renewal --email lewis@nplgwedding.com -d nplgwedding.com -d www.nplgwedding.com --agree-tos
+        networks:
+            - my-network
+
     nginx:
         image: nginx:1.23
         container_name: nginx
         restart: unless-stopped
         volumes:
             - ./:/var/www
+            - ./certbot/www:/var/www/certbot:ro
+            - ./certbot/conf:/etc/letsencrypt:ro
             - ./default.conf:/etc/nginx/conf.d/default.conf
         ports:
             - 80:80
+            - 443:443
         networks:
             - my-network
         depends_on:
             - flask
+    
     flask:
         env_file:
             - .env
@@ -21,7 +35,7 @@ services:
             context: ./
             dockerfile: Dockerfile
         container_name: flask
-        command: flask db upgrade && gunicorn --bind 0.0.0.0:8000 --workers 2 wedding-website:app
+        command: gunicorn --bind 0.0.0.0:8000 --workers 2 wedding-website:app
         restart: unless-stopped
         volumes:
             - ./:/var/www
