@@ -8,7 +8,7 @@ from flask import flash, redirect, render_template, url_for
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    return render_template('index.html', title='Welcome To Our Wedding')
 
 @app.route('/rsvp', methods=['GET', 'POST'])
 def rsvp():
@@ -25,8 +25,6 @@ def rsvp():
             message = form.message.data
         )
 
-        # Cast the chosen diet requirements into a string e.g. [1,3,4] -> '134'
-        # also create an readable string for the email confirmation. e.g "vegetarian, nut allergies, fish allergies" in place of numbers.
         diet_dict = {
             1: 'Vegetarian',
             2: 'Vegan',
@@ -36,7 +34,9 @@ def rsvp():
         }
 
         if guest.diet_req:
+            # Cast the chosen diet requirements into a string e.g. [1,3,4] -> '134'
             guest.diet_req = ''.join(map(str, guest.diet_req))
+            # also create an readable string for the email confirmation.
             diet_string = ', '.join([diet_dict[int(i)] for i in ' '.join(guest.diet_req).split()])
         else:
             guest.diet_req = 0
@@ -50,6 +50,7 @@ def rsvp():
                 text_body = render_template('email/rsvp_response.txt', guest = guest, diet_string = diet_string),
                 html_body = render_template('email/rsvp_response.html', guest = guest, diet_string = diet_string)
             )
+
         except Exception as err:
             flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {app.config["ADMINS"][0]} - {err}', 'error')
             db.session.rollback()
