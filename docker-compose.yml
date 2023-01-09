@@ -10,6 +10,8 @@ services:
         command: certonly --webroot -w /var/www/certbot --force-renewal --email lewis@nplgwedding.com -d nplgwedding.com -d www.nplgwedding.com --agree-tos
         networks:
             - my-network
+        profiles:
+            - certbot
 
     nginx:
         image: nginx:1.23
@@ -27,6 +29,8 @@ services:
             - my-network
         depends_on:
             - flask
+        profiles:
+            - app
     
     flask:
         env_file:
@@ -39,6 +43,8 @@ services:
         restart: unless-stopped
         volumes:
             - ./:/var/www
+        profiles:
+            - app
         networks:
             my-network:
                 aliases:
