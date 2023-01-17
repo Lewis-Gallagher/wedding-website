@@ -4,24 +4,28 @@
 <div class="container" style="padding-top: 40px">
     <div class="card shadow" align="center">
         <!-- https://www.fontspace.com/geraldine-font-f61160 -->
-        <img src="https://see.fontimg.com/api/renderfont4/PK12m/eyJyIjoiZnMiLCJoIjo0ODAsInciOjI0MDAsImZzIjoyMDAsImZnYyI6IiM5OThGNEYiLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/WW91IGFyZSBpbnZpdGVk/geraldine-personal-use-italic.png" alt="Cursive fonts" width="85%" class="photo-base"></a>
+        <img src="https://see.fontimg.com/api/renderfont4/PK12m/eyJyIjoiZnMiLCJoIjo0ODAsInciOjI0MDAsImZzIjoyMDAsImZnYyI6IiM5OThGNEYiLCJiZ2MiOiIjRkZGRkZGIiwidCI6MX0/WW91IGFyZSBpbnZpdGVk/geraldine-personal-use-italic.png" alt="Cursive fonts" width="60%"></a>
         <br>
 
-        <img style="border-style: ridge; border-width:3px" src="{{ url_for('static', filename='images/Save The Date.jpg') }}", width="60%" class="shadow">
+        <img src="{{ url_for('static', filename='images/save_the_date.jpg') }}", width="60%" class="shadow photo-base">
         <br>
         <br>
-        <p>
-            to the wedding of
-        </p>
+        <div class="container-fluid" style="font-size:1.4em; letter-spacing: 0.2em;">
+            <p>
+                to the wedding of
+            </p>
 
-        <p>
-            Lewis Gallagher <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20"> Nikita Patel
-        </p>
-        <hr>
-        <p>
-            31.05.24<br>
-            The Atlantica Beach Resort, Kos
-        </p>
+            <p>
+                Nikita Patel<br>
+                <img src="{{ url_for('static', filename='images/ampersand.png') }}", width="20" style="margin: 0.4em"><br>
+                Lewis Gallagher
+            </p>
+            <hr>
+            <p>
+                31.05.24<br>
+                The Atlantica Beach Resort, Kos
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}
