@@ -11,4 +11,5 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'db/app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ADMINS = ['lewis@nplgwedding.com']
+    SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
     
