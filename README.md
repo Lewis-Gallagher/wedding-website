@@ -137,5 +137,4 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED        S
 The docker service will automatically attempt to restart unless it is explicitly stopped, via the `restart: unless-stopped` argument. So in the event of the droplet being rebooted, or the app crashing, the docker service will restart automatically without the need for manual intervention.
 
 # To do
-1. TLS/SSL Certificate for HTTPS encryption.
-2. Mount persistent storage to prevent data loss.
+1. Mount persistent storage to prevent data loss.
