@@ -1,8 +1,17 @@
 <p>Dear {{ guest.name }},</p>
 
-<p>Thank you so much for your RSVP to our wedding. {% if guest.attending == 1 %}We look forwrad to welcoming you to our special day!{% else %}We're sorry you can't make it! But we know you'll be celebrating with us from afar and we hope to see you soon.{% endif %}</p>
+<p>Thank you so much for your RSVP to our wedding.</p>
+    
+{% if guest.attending == 1 %}
+<p>We look forwrad to welcoming you to our special day!</p> 
 
-<p>Feel free to return to the wedding website at <a target="_blank" href="nplg.wedding.com">nplg.wedding.com</a> for further information on the venue, hotel information and FAQs. Feel free to email us at lewis@nplgwedding.com if you have any questions.</p>
+<p>Feel free to return to <a target="_blank" href="www.nplgwedding.com">www.nplgwedding.com</a> for more information on the venue as well as the FAQ page which may, should you have any, answer some of your questions. The website will be updated closer to the wedding date with details regarding timings and food etc.</p>
+
+{% else %}
+<p>We're sorry you can't make it! But we know you'll be celebrating with us from afar and we hope to see you soon.</p>
+{% endif %}
+
+<p>If you have any questions or want to just pop us a message, you are welcome to email us at <a target="_blank" href="mailto:lewis@nplgwedding.com">lewis@nplgwedding.com</a>.</p>
 
 <p>Best wishes,<br>
 Lewis and Niki</p>
