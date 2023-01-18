@@ -53,12 +53,14 @@ def rsvp():
 
         except Exception as err:
             flash(f'There was a problem submitting your RSVP. Please try again. If the problem persists please contact {app.config["ADMINS"][0]} - {err}', 'error')
+            app.logger.error(f'Failed to send RSVP confirmation email to {guest.email} - {guest} - {err}')
             db.session.rollback()
 
         else:
             db.session.add(guest)
             db.session.commit()
             flash(f'Thank you! Your RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email}.', 'message')
+            app.logger.info(f'Successfully sent RSVP confirmation to {guest.email} - {guest}')
 
         return redirect(url_for('index'))
 
