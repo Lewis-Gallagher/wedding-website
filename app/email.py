@@ -9,7 +9,7 @@ def send_email(subject='NP LG Wedding', from_email=app.config['ADMINS'][0], to_e
     All emails will be sent to admins so the to_emails variable needs to be extended.
     """
 
-    to_emails = app.config['ADMINS'].extend([to_emails])
+    app.config['ADMINS'].extend([to_emails])
 
     msg = Mail(from_email = from_email,
                to_emails = to_emails,
