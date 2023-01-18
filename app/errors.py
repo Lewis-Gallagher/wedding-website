@@ -17,9 +17,9 @@ def handle_500(error):
         resp = send_email(
             subject="[wedding-website] An unexpected error has occurred.",
             from_email=app.config['ADMINS'][0],
-            to_emails=app.config['ADMINS'][0],
+            to_emails=app.config['ADMINS'],
             text_body = error_tb,
             html_body=None)
     except Exception as exc:
-        print(exc)
+        app.logger.error(f'{exc} - {error_tb}')
     return app.finalize_request(error, from_error_handler=True)
