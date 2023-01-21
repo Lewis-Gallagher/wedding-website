@@ -1,7 +1,6 @@
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from app import app
-from config import Config
 
 def send_email(subject='NP LG Wedding', from_email=app.config['ADMINS'][0], to_emails=None, text_body=None, html_body=None):
     """
@@ -9,7 +8,8 @@ def send_email(subject='NP LG Wedding', from_email=app.config['ADMINS'][0], to_e
     All emails will be sent to admins so the to_emails variable needs to be extended.
     """
 
-    app.config['ADMINS'].extend([to_emails])
+    to_emails = [to_emails]
+    to_emails.extend(app.config['ADMINS'])
 
     msg = Mail(from_email = from_email,
                to_emails = to_emails,
