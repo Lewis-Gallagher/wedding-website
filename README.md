@@ -2,7 +2,10 @@
 A Python Flask app for our wedding
 - [wedding-website](#wedding-website)
   - [Tools](#tools)
-- [Run the App](#run-the-app)
+- [Running the App](#running-the-app)
+  - [Quick Start](#quick-start)
+  - [With Linux Server](#with-linux-server)
+- [Certbot](#certbot)
 - [Website Structure](#website-structure)
   - [Home Page](#home-page)
   - [RSVP Form](#rsvp-form)
@@ -11,6 +14,7 @@ A Python Flask app for our wedding
   - [The Story of Us](#the-story-of-us)
 - [Flask App](#flask-app)
 - [SQLite Database](#sqlite-database)
+  - [Setup](#setup)
   - [Structure](#structure)
   - [Considerations](#considerations)
   - [Backups](#backups)
@@ -31,7 +35,41 @@ A Python Flask app for our wedding
 * **HTML, CSS** and **Jinja** for front-end development.
 * **Digital Ocean** droplet Ubuntu virtual machine.
 
-# Run the App
+# Running the App
+## Quick Start
+The app can be launched using the native Flask web server. While this isn't suitable for a production application, it is useful for testing.
+1. Clone this repository.
+    ```bash
+    git clone https://github.com/Lewis-Gallagher/wedding-website.git
+    ```
+
+2. Create a python virtual environment and install the requirements from within the project directory.
+    ```bash
+    python3 -m venv venv
+    pip install -r requirements.txt
+    ```
+3. Create a `.env` file containing environmental variables for the app:
+   1. **FLASK_APP** - the name of the python file that loads the app.
+   2. **SENDGRID_API_KEY** - A [SendGrid](https://sendgrid.com/) API key for sending emails.
+   3. **SECRET_KEY** - A secret key for CSRF protection to use the FLask-WTF FlaskForms.
+   4. **MAIL_DEFAULT_SENDER** - The email address which will send emails to invitees.
+   
+   For example:
+    ```bash
+    FLASK_APP=wedding-website.py
+    SENDGRID_API_KEY="********"
+    SECRET_KEY="example-secret-key"
+    MAIL_DEFAULT_SENDER=lewis@nplgwedding.com
+    ```
+
+    _N.B. The `FLASK_APP` variable is required. The app will still run without the bottom three variables, however the RSVP form and confirmation emails will not be operational._
+
+4. Launch the app via Flask
+    ```bash
+    flask run
+    ```
+
+## With Linux Server
 1. The website requires a Ubuntu server with a small number of prerequisites which are detailed in the [droplet setup file](droplet-setup.md).
 2. Clone this repository.
     ```bash
@@ -52,10 +90,12 @@ A Python Flask app for our wedding
 
     _N.B. This isn't the most secure method, as anybody with root access to the droplet can inspect the container while it's running to view any set environmental variables. An alternative would be to use docker secrets, however, this requires setting up docker as a swarm service._
 
-4. Launch the docker compose service from within the project directory (i.e. in the same directory as the `docker-compose.yml` file):
+4. Launch the app profile of the docker service from within the project directory (i.e. in the same directory as the `docker-compose.yml` file):
     ```bash
-    sudo docker compose up -d
+    sudo docker compose up --profile app -d
     ``` 
+
+# Certbot
 
 # Website Structure
 ## Home Page
@@ -81,6 +121,8 @@ The Flask application front end is written with HTML, CSS and Bootstrap with Jin
 
 # SQLite Database
 The app uses an SQLite database as it is lightweight and traffic is expected to be very low.  This is interacted with via the Flask SQLAlchemy package.
+
+## Setup
 
 ## Structure
 The database contains two tables: Invited and Guest. The Invited table contains the email addresses of all invitees and a unique ID which is a foreign key to the Guest table. The Guest table contains attendee information including a unique I, name, contact information, dietary requirements and an optional message. 
@@ -138,3 +180,5 @@ The docker service will automatically attempt to restart unless it is explicitly
 
 # To do
 1. Mount persistent storage to prevent data loss.
+2. Write instructions for first time database setup i.e. one-off flask db migrate and upgrade commands
+3. Write instructions for certbot certificate renewal. i.e. certbot profile command.
