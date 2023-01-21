@@ -21,7 +21,7 @@ services:
             - ./:/var/www
             - ./certbot/www:/var/www/certbot:ro
             - ./certbot/conf:/etc/letsencrypt:ro
-            - ./default.conf:/etc/nginx/conf.d/default.conf
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf
         ports:
             - 80:80
             - 443:443
