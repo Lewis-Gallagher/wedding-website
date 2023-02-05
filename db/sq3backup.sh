@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p ${PWD}/bak;
-FILE=${PWD}/app.db
+FILE=$1
 
 if [ -f "$FILE" ]; then
     t=$(date "+%Y%m%d-%H%M%S");
