@@ -1,5 +1,5 @@
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from sendgrid.helpers.mail import Mail, Personalization, Bcc, Email
 from app import app
 
 def send_email(subject='NP LG Wedding', from_email=app.config['ADMINS'][0], to_emails=None, text_body=None, html_body=None):
@@ -9,7 +9,7 @@ def send_email(subject='NP LG Wedding', from_email=app.config['ADMINS'][0], to_e
     """
 
     to_emails = [to_emails]
-    to_emails.extend(app.config['ADMINS'])
+    # to_emails.extend(app.config['ADMINS'])
 
     msg = Mail(from_email = from_email,
                to_emails = to_emails,
@@ -17,6 +17,12 @@ def send_email(subject='NP LG Wedding', from_email=app.config['ADMINS'][0], to_e
                plain_text_content = text_body,
                html_content = html_body
                )
+    
+    personalisation = Personalization()
+    personalisation.add_to(Email(to_emails))
+    personalisation.add_bcc(Bcc(app.config['ADMINS']))
+
+    msg.add_personalization(personalisation)        
 
     sg = SendGridAPIClient(api_key=app.config['SENDGRID_API_KEY'])
     response = sg.send(msg)
