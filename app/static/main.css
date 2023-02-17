@@ -9,7 +9,6 @@ body {
     color:#AD9463;
     -moz-text-size-adjust: none;
     font-family: "Optima", "Serif", "Tahoma", "Verdana", "Arial", sans-serif;
-    font-size: 120%;
 }
 
 .photo-base {
@@ -52,6 +51,10 @@ body {
     border-radius: 0%;
     border-color: #AD9463;
     padding: 5%;
+}
+
+.card-content {
+  font-size: 120%;
 }
 
 .flash {
