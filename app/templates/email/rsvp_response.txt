@@ -5,7 +5,7 @@ Dear {{ guest.name }},
 Thank you so much for your RSVP to our wedding.
     
 {% if guest.attending == 1 %}
-We look forwrad to welcoming you to our special day!
+We look forward to welcoming you to our special day!
 
 Feel free to return to www.nplgwedding.com for more information on the venue as well as the FAQ page which may answer some of your questions. The website will be updated closer to the wedding date with details regarding timings and food etc.
 
