@@ -2,7 +2,6 @@
 __pycache__/
 .flaskenv
 app.db
-migrations/
 certbot
 logs/
 venv/
