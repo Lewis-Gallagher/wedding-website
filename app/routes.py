@@ -59,7 +59,7 @@ def rsvp():
         else:
             db.session.add(guest)
             db.session.commit()
-            flash(f'Thank you! Your RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email}.', 'message')
+            flash(f"Thank you! Your RSVP has been successfully submitted. You will shortly receive a confirmation email to {guest.email} (you may need to check your junk/spam folders).", 'message')
             app.logger.info(f'Successfully sent RSVP confirmation to {guest.email} - {guest}')
 
         return redirect(url_for('index'))
