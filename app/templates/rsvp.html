@@ -2,12 +2,93 @@
 
 {% block content %}
     
-<div class="container" style="padding: 5%; letter-spacing: 0em;">
-    <form class ="card shadow" method="POST" action="{{ url_for('rsvp') }}" novalidate>
-        <div align="center" style="padding: 2%">
-            <img src="{{ url_for('static', filename='images/rsvp.png') }}" width=40%/>
+<div class="rsvp-form">
+    <div class="fieldset">
+
+        <legend>- RSVP -</legend>
+
+        <div class="row" style="width: 75%; margin: auto;">
+            <p>
+                Please submit <strong>one RSVP per person</strong>. If you need to amend your RSVP, please contact <i>lewis@nplgwedding.com</i>.
+            </p>
         </div>
-        <hr>
+        
+        
+        <form class="form-group" style="padding: 0 0 30px 0;" method="POST" action="{{ url_for('rsvp') }}" novalidate>
+                        
+            <div class="row">
+                {{ form.hidden_tag() }}
+                <br>
+            </div>
+
+            <hr>
+    
+            <div>
+                {{ form.attending.label() }}<br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">
+                    <label class="form-check-label" for="attending">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
+                    <label class="form-check-label" for="attending">No</label>
+                </div>
+                
+                <br>{% for error in form.attending.errors %}
+                <span id="form-error">[{{ error }}]</span>
+                {% endfor %}
+                
+            </div>
+            
+            <div class="row" id="user-input">
+                {{ form.name.label(class='form-control-label', for='name') }}
+                {{ form.name(placeholder='Full name', class='form-control', id='name') }}
+
+                {% for error in form.name.errors %}
+                <span id="form-error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="row" id="user-input">
+                {{ form.email.label(class='form-control-label', for='email') }}
+                {{ form.email(placeholder='Email', class='form-control', id='email') }}
+
+                {% for error in form.email.errors %}
+                <span id="form-error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="row" id="user-input">
+                {{ form.phone.label(class='form-control-label', for='phone') }}
+                {{ form.phone(placeholder='Phone number', class='form-control', id='phone') }}
+
+                {% for error in form.phone.errors %}
+                <span id="form-error">[{{ error }}]</span>
+                {% endfor %}
+            </div>
+
+            <div class="row" id="user-input">
+                {{ form.diet_req.label(for="diet_req") }}
+                {{ form.diet_req(class="checkbox", id="diet_req", style="margin:0;") }}
+            </div>
+
+            <div class="row" id="user-input">
+                {{ form.message.label(class='form-control-label', value='An additional message') }}
+                {{ form.message(placeholder='Max 150 characters', class='form-control', id='message') }}
+            </div>
+
+            <hr>
+
+            <div class="row" id="user-input">
+                {{ form.submit(class="btn btn-light form-control", value='RSVP now', style="font-weight: bold") }}
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<!-- 
         <div align="center">
             <p>
                 Please submit <strong>one RSVP per person</strong>. If you need to amend your RSVP, please contact <i>lewis@nplgwedding.com</i>.
@@ -74,5 +155,5 @@
             <p>If you have any issues please contact <i>lewis@nplgwedding.com.</i></p>
         </div>
     </form>
-</div>
+</div> -->
 {% endblock %}

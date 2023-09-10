@@ -1,100 +1,178 @@
-
+/* styles.css */
 body {
-    background-image: url(images/blue-gold-marble-textured-background.jpg);
-    background-size: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;    
-    background-color: #2f5563;
-    color:#AD9463;
-    -moz-text-size-adjust: none;
-    font-family: "Optima", "Serif", "Tahoma", "Verdana", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: "Junge", sans-serif;
+  background-color: #264550;
+  color: #AD9463;
+  font-size: large;
+  letter-spacing: 0.25em;
 }
 
-.photo-base {
-    padding: 0em;
-    border-style: solid;
-    border-color: #AD9463;
-    border-width: 0.1em;
+ /* Three image containers (use 25% for four, and 50% for two, etc) */
+ .column {
+  float: left;
+  width: 33.33%;
+  padding: 15px 15px;
 }
 
-.nav-base {
-    background:#2f5563;
-    color:#AD9463;
-    font-size: 1em;
-    letter-spacing: 0.2em;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 0.1em;
-    border-style: solid;
-    border-color: #AD9463;
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+} 
+
+.nav {
+  display: flex;
+  justify-content: space-evenly; /* Change to space-evenly for equal spacing */
+  align-items: center;
+  list-style: none;
+  background-color: #2f5563;
+  border-bottom-style: solid;
+  border-width: 2px;
+  border-bottom-color: #AD9463;
+  padding: 5px 5px;
+  letter-spacing: 0.2em;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
-.nav-base li {
-    margin-right: 2em;
-    margin-left: 2em;
-    list-style: none;
-    text-decoration: none;
-    display: inline;
-    font-size: 1.5em;
- }
-
-.card {
-    background:#2f5563;
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    border-style: double;
-    border-width: 7px;
-    border-radius: 0%;
-    border-color: #AD9463;
-    padding: 5%;
+.nav li {
+  margin: 0 20px;
+  text-decoration: none;
+  color: #9b9488;
+  font-size: 24px;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.flash {
-    background-color: #AD9463;
-    letter-spacing: normal;
-    font-size: 80%;
-    color: #2f5563;
-    margin: auto;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-left: auto;
-    text-align: center;
-    width: 100%;
+.nav a:hover {
+  color:#AD9463;
 }
 
-checkbox {
-    background-color: transparent;
-    color:inherit;
-    border-style: none;
-    background:rgba(0, 0, 0, 0.00)
+.hero {
+  background: url('static/our_story.jpg') center/cover no-repeat;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
 
-shadow {
-    box-shadow:
-    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
-    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
-    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
-    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
-    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-    100px 100px 80px rgba(0, 0, 0, 0.07)
-  ;}
+.fancytext {
+  text-align: center;
+  padding: 20px;
+}
 
-  a:link {
-    color: #AD9463;
-    background-color: transparent;
-    text-decoration: none;
+.fancytext img{
+  width: 75%;
+}
+
+.content {
+  text-align: center;
+  background-color: #2f5563;
+  margin: auto;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #AD9463;
+  margin: 20px 20px;
+  padding: 40px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.35);
+}
+
+.rsvp-form {
+  width: 40%;
+  min-width: 250px;
+  margin: 20px auto;
+  position: relative;
+  border-style: solid;
+  border-width: 2px;
+  text-align: center;
+  letter-spacing: 0em;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* Media query for smartphones (max-width: 767px) */
+@media (max-width: 800px) {
+  .rsvp-form {
+      width: 80%;
   }
-  a:visited {
-    color: #AD9463;
-    background-color: transparent;
-    text-decoration: none;
-  }
-  a:hover {
-    color: #AD9463;
-    background-color: transparent;
-    text-decoration: underline;
-  }
+}
+
+.rsvp-form ul{
+  list-style-type: none
+}
+
+.rsvp-form .fieldset {
+  background-color:#2f5563;
+}
+
+.rsvp-form legend {
+  text-align: center;
+  width: 100%;
+  padding: 30px 0;
+  font-size:2em;
+}
+
+.fieldset form {
+  margin:0 auto;
+  display:block;
+  width:75%;
+  padding:30px 20px;
+  box-sizing:border-box;
+}
+
+#user-input {
+  padding: 20px 0px;
+  text-align: left;
+}
+
+.form-control-label {
+  text-align: left;
+  padding: 0;
+}
+
+#form-error {
+  color: red; 
+  font-size: 0.8em; 
+  padding-top: 5px;
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.countdown-item {
+  margin: 0 20px;
+  text-align: center;
+}
+
+.countdown-item span {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.countdown-item p {
+  margin: 5px 0;
+}
+
+footer {
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0;
+  padding: 20px;
+}
+
+footer img {
+  transition: transform .2s; /* Animation */
+}
+
+footer img:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}

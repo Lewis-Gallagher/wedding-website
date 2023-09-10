@@ -46,7 +46,7 @@ class RSVPForm(FlaskForm):
             ]
         )
     message = TextAreaField(
-        label = 'Message', 
+        label = 'An additional message', 
         validators = [Length(max = 150)]
         )
     submit = SubmitField(
