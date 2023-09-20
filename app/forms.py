@@ -2,13 +2,33 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, TelField, RadioField, widgets, SelectMultipleField
 from wtforms.validators import DataRequired, Email, Length, Optional, ValidationError
 from app.models import Guest
-
+from markupsafe import Markup
+from wtforms import SelectMultipleField, widgets
+from markupsafe import Markup
+ 
+ 
+class BootstrapListWidget(widgets.ListWidget):
+ 
+    def __call__(self, field, **kwargs):
+        kwargs.setdefault("id", field.id)
+        html = [f"<{self.html_tag} {widgets.html_params(**kwargs)}>"]
+        for subfield in field:
+            if self.prefix_label:
+                html.append(f"<li class='list-group-item'>{subfield.label} {subfield(class_='form-check-input ms-1')}</li>")
+            else:
+                html.append(f"<li class='list-group-item'>{subfield(class_='form-check-input me-1')} {subfield.label}</li>")
+        html.append("</%s>" % self.html_tag)
+        return Markup("".join(html))
+ 
+ 
 class MultiCheckboxField(SelectMultipleField):
     """
     A multiple-select, except displays a list of checkboxes.
-    Iterating the field will produce subfields, allowing custom rendering of the enclosed checkbox fields.
+ 
+    Iterating the field will produce subfields, allowing custom rendering of
+    the enclosed checkbox fields.
     """
-    widget = widgets.ListWidget(prefix_label=False)
+    widget = BootstrapListWidget(prefix_label=False)
     option_widget = widgets.CheckboxInput()
 
 
@@ -34,7 +54,7 @@ class RSVPForm(FlaskForm):
         validators = [DataRequired()]
         )
     diet_req = MultiCheckboxField(
-        label = 'Dietary requirements', 
+        label = 'Dietary requirements (if any)', 
         validators = [Optional()],
         coerce = int,
         choices = [
@@ -46,7 +66,7 @@ class RSVPForm(FlaskForm):
             ]
         )
     message = TextAreaField(
-        label = 'An additional message', 
+        label = 'An optional message', 
         validators = [Length(max = 150)]
         )
     submit = SubmitField(
