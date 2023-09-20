@@ -9,6 +9,10 @@ body {
   letter-spacing: 0.25em;
 }
 
+.card-content {
+  font-size: 120%;
+}
+
 .flash {
   background-color: #AD9463;
   color: #2f5563;
