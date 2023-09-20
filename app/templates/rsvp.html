@@ -23,18 +23,19 @@
 
             <hr>
     
-            <div>
+            <div class="row">
                 {{ form.attending.label() }}<br>
-                <div class="form-check form-check-inline">
+                {{ form.attending(id="attending") }}
+                <!-- <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">
                     <label class="form-check-label" for="attending">Yes</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
                     <label class="form-check-label" for="attending">No</label>
-                </div>
+                </div> -->
                 
-                <br>{% for error in form.attending.errors %}
+                {% for error in form.attending.errors %}
                 <span id="form-error">[{{ error }}]</span>
                 {% endfor %}
                 
@@ -68,12 +69,27 @@
             </div>
 
             <div class="row" id="user-input">
-                {{ form.diet_req.label(for="diet_req") }}
-                {{ form.diet_req(class="checkbox", id="diet_req", style="margin:0;") }}
+                {{ form.diet_req.label(class_="form-label") }}
+                {{ form.diet_req(class_="list-group") }}
+<!-- https://www.techcoil.com/blog/rendering-multiple-checkboxes-with-wtforms-and-bootstrap/ -->
+                <!-- <input type="checkbox" class="btn-check" id="btn-check-1-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary form-check-label" for="btn-check-1-outlined">Vegetarian</label>
+
+                <input type="checkbox" class="btn-check" id="btn-check-2-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary form-check-label" for="btn-check-2-outlined">Vegan</label>
+
+                <input type="checkbox" class="btn-check" id="btn-check-4-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary form-check-label" for="btn-check-4-outlined">Nut allergies</label>
+
+                <input type="checkbox" class="btn-check" id="btn-check-5-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary form-check-label" for="btn-check-5-outlined">Fish and/or shelfish allergies</label>
+
+                <input type="checkbox" class="btn-check" id="btn-check-6-outlined" autocomplete="off">
+                <label class="btn btn-outline-secondary form-check-label" for="btn-check-6-outlined">Other - please specify below</label>                   -->
             </div>
 
             <div class="row" id="user-input">
-                {{ form.message.label(class='form-control-label', value='An additional message') }}
+                {{ form.message.label(class='form-control-label', label='An optional message') }}
                 {{ form.message(placeholder='Max 150 characters', class='form-control', id='message') }}
             </div>
 
