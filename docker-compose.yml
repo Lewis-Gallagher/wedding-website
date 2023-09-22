@@ -7,7 +7,7 @@ services:
         volumes: 
             - ./certbot/conf:/etc/letsencrypt
             - ./certbot/www:/var/www/certbot
-        command: certonly --webroot -w /var/www/certbot --force-renewal --email lewis@nplgwedding.com -d nplgwedding.com -d www.nplgwedding.com --agree-tos
+        command: certonly -v --webroot -w /var/www/certbot --force-renewal --email lewis@nplgwedding.com -d nplgwedding.com -d www.nplgwedding.com --agree-tos
         networks:
             - my-network
         profiles:
