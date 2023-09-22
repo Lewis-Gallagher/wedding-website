@@ -6,15 +6,14 @@ A Python Flask app for our wedding
   - [Quick Start](#quick-start)
   - [With Linux Server](#with-linux-server)
 - [Certbot](#certbot)
+  - [Certbot certificate renewal](#certbot-certificate-renewal)
 - [Website Structure](#website-structure)
   - [Home Page](#home-page)
   - [RSVP Form](#rsvp-form)
   - [FAQ](#faq)
   - [Event Info](#event-info)
-  - [The Story of Us](#the-story-of-us)
 - [Flask App](#flask-app)
 - [SQLite Database](#sqlite-database)
-  - [Setup](#setup)
   - [Structure](#structure)
   - [Considerations](#considerations)
   - [Backups](#backups)
@@ -24,7 +23,6 @@ A Python Flask app for our wedding
     - [Logs](#logs)
     - [Monitoring](#monitoring)
     - [Restarting the Service](#restarting-the-service)
-- [To do](#to-do)
 
 ## Tools
 * **Flask** and various flask addons including Flask-WTForms and Flask-SQLAlchemy.
@@ -32,7 +30,7 @@ A Python Flask app for our wedding
 * **Docker** and **Docker Compose** for running the multi-container application.
 * **Nginx** and **Gunicorn** to handle incoming requests and set up the web server respectively.
 * **SendGrid** and the **SendGridAPIClient** for sending emails.
-* **HTML, CSS** and **Jinja** for front-end development.
+* **HTML, CSS, Bootstrap** and **Jinja** for front-end development.
 * **Digital Ocean** droplet Ubuntu virtual machine.
 
 # Running the App
@@ -96,11 +94,15 @@ The app can be launched using the native Flask web server. While this isn't suit
     ``` 
 
 # Certbot
+## Certbot certificate renewal
+```bash
+sudo docker compose --profile certbot run certbot renew --cert-name nplgwedding.com --force-renewal
+sudo docker compose --profile certbot run certbot renew --cert-name www.nplgwedding.com --force-renewal
+```
 
 # Website Structure
 ## Home Page
-Shows the digital invite card. All pages include a navigation bar with links to other areas of the site.
-
+Landing page including a short story of our 5 years together, written by the bride.
 ## RSVP Form
 A Flask-WTForm with numerous fields:
 * Attending: yes/no.
@@ -113,8 +115,6 @@ A Flask-WTForm with numerous fields:
 A list of frequently asked questions and answers. Self-explanatory.
 ## Event Info
 Information on the venue. Location, times, hotel recommendations and nearby towns.
-## The Story of Us
-A short story of our 5 years together, written by the bride.
 
 # Flask App
 The Flask application front end is written with HTML, CSS and Bootstrap with Jinja to interact with Guest RSVP responses. The RSVP form takes information from the user and emails the user, via the SendGrid API, a confirmation email with a custom message and their RSVP details included. The user's RSVP data is then written to a local SQLite database. Details of the database are expanded upon in the following section.
@@ -122,20 +122,18 @@ The Flask application front end is written with HTML, CSS and Bootstrap with Jin
 # SQLite Database
 The app uses an SQLite database as it is lightweight and traffic is expected to be very low.  This is interacted with via the Flask SQLAlchemy package.
 
-## Setup
-
 ## Structure
-The database contains two tables: Invited and Guest. The Invited table contains the email addresses of all invitees and a unique ID which is a foreign key to the Guest table. The Guest table contains attendee information including a unique I, name, contact information, dietary requirements and an optional message. 
+The database contains one table: `Guest`. The `Guest` table contains attendee information including a unique ID, name, contact information, dietary requirements and an optional message. 
 
 ## Considerations
-The flask forms are set up so an RSVP may only be submitted with an email address that exists in the Invited table. This is to ensure no uninvited guests may RSVP and also prevents me from having guests register with an email address and password. This is not the most secure option as one may easily RSVP with someone else's email address, however, I felt a user registration system would be unnecessary for an otherwise static and non-interactive website.
-
+Due to the relatively static nature of the site and the reality that most guests will only visti it once to submit their RSVPs, I felt a login service was unnecessary. This does mean that literally anyone can submit an RSVP to the site, regardless if they were invited to the wedding or not. The database is protected from SQL injections, and therefore the main consideration is potential malicious spam submitions.
 ## Backups
 Database backups are important to not erroneously lose attendee information. This is achieved manually every time the database is manually accessed by running the [sq3backup.sh](sq3backup.sh) script: 
 ```bash
-. sq3backup.sh
+cd db/
+. sq3backup.sh app.db
 ``` 
-This creates a backup file of the database, labelled with the date and time, within the `./bak` directory.
+This creates a backup file of the database, labelled with the date and time, within the `db/bak/` directory.
 
 The database can be restored with:
  ```bash
@@ -177,8 +175,3 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED        S
 ```
 ### Restarting the Service
 The docker service will automatically attempt to restart unless it is explicitly stopped, via the `restart: unless-stopped` argument. So in the event of the droplet being rebooted, or the app crashing, the docker service will restart automatically without the need for manual intervention.
-
-# To do
-1. Mount persistent storage to prevent data loss.
-2. Write instructions for first time database setup i.e. one-off flask db migrate and upgrade commands
-3. Write instructions for certbot certificate renewal. i.e. certbot profile command.
