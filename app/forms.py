@@ -70,7 +70,8 @@ class RSVPForm(FlaskForm):
         validators = [Length(max = 150)]
         )
     submit = SubmitField(
-        label = 'RSVP'
+        label = 'RSVP',
+        render_kw={'disabled':''}
         )
     
     def validate_email(self, email):
