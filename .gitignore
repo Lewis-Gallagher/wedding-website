@@ -6,6 +6,7 @@ certbot
 logs/
 venv/
 bak/
+migrations/
 .backup
 .restore
 .env
