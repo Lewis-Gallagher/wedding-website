@@ -40,7 +40,7 @@ Executing docker install script, commit: 7cae5f8b0decc17d6571f9f52eb840fbc13b273
 This installs `docker` and `docker compose`
 
 ## App setup
-Simply clone the git repository to the new user `lgallagher` home directory.
+Simply clone the git repository to the new user home directory.
 ```bash
 cd
 git clone https://github.com/Lewis-Gallagher/wedding-website.git

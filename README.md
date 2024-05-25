@@ -1,18 +1,13 @@
 # wedding-website
 A Python Flask app for our wedding
 - [wedding-website](#wedding-website)
+- [Introduction](#introduction)
   - [Tools](#tools)
 - [Running the App](#running-the-app)
   - [Quick Start](#quick-start)
   - [With Linux Server](#with-linux-server)
 - [Certbot](#certbot)
   - [Certbot certificate renewal](#certbot-certificate-renewal)
-- [Website Structure](#website-structure)
-  - [Home Page](#home-page)
-  - [RSVP Form](#rsvp-form)
-  - [FAQ](#faq)
-  - [Event Info](#event-info)
-- [Flask App](#flask-app)
 - [SQLite Database](#sqlite-database)
   - [Structure](#structure)
   - [Considerations](#considerations)
@@ -20,9 +15,12 @@ A Python Flask app for our wedding
 - [Docker Service](#docker-service)
   - [Docker Compose](#docker-compose)
     - [Run](#run)
-    - [Logs](#logs)
     - [Monitoring](#monitoring)
     - [Restarting the Service](#restarting-the-service)
+
+
+# Introduction
+Having a good few years of Python experience I decided to set myself the challenge of building my own web app from scratch for our wedding. Specifically a way of managing RSVPs and a source of information for guests. I ended up learning a lot more than I initially thought I would, such as domains, nginx web hosting, docker compose, email APIs and much much more.
 
 ## Tools
 * **Flask** and various flask addons including Flask-WTForms and Flask-SQLAlchemy.
@@ -95,32 +93,15 @@ The app can be launched using the native Flask web server. While this isn't suit
 
 # Certbot
 ## Certbot certificate renewal
+The certbot certificates require renewal every 90 days. I haven't figured out how to enforce automatic renweal of certificates so for now these commands are run within the virutal machine hosting the app.
 ```bash
 sudo docker compose --profile certbot run certbot renew --cert-name nplgwedding.com --force-renewal
 sudo docker compose --profile certbot run certbot renew --cert-name www.nplgwedding.com --force-renewal
 ```
-
-# Website Structure
-## Home Page
-Landing page including a short story of our 5 years together, written by the bride.
-## RSVP Form
-A Flask-WTForm with numerous fields:
-* Attending: yes/no.
-* Name (must be unique).
-* Email address (must be unique and be an invited email address).
-* Phone number.
-* Dietary requirements (if any).
-* An optional message.
-## FAQ
-A list of frequently asked questions and answers. Self-explanatory.
-## Event Info
-Information on the venue. Location, times, hotel recommendations and nearby towns.
-
-# Flask App
-The Flask application front end is written with HTML, CSS and Bootstrap with Jinja to interact with Guest RSVP responses. The RSVP form takes information from the user and emails the user, via the SendGrid API, a confirmation email with a custom message and their RSVP details included. The user's RSVP data is then written to a local SQLite database. Details of the database are expanded upon in the following section.
+The Docker service may need to be restarted after these commands are run.
 
 # SQLite Database
-The app uses an SQLite database as it is lightweight and traffic is expected to be very low.  This is interacted with via the Flask SQLAlchemy package.
+The app uses an SQLite database as it is lightweight and traffic is expected to be very low. This is interacted with via the Flask SQLAlchemy package.
 
 ## Structure
 The database contains one table: `Guest`. The `Guest` table contains attendee information including a unique ID, name, contact information, dietary requirements and an optional message. 
@@ -155,17 +136,16 @@ The service consists of two images. The first is built from the `Dockerfile` in 
 ### Run
 From there the service is run with docker compose in detached mode (`-d`) from the project directory, containing the `docker-compose.yml` file:
 ```bash
-sudo docker compose up -d
-```
-### Logs
- Docker compose logs can be inspected by running the following command from the project directory, containing the `docker-compose.yml` file.
-```bash
-sudo docker compose logs
+sudo docker compose --profile app up -d
 ```
 ### Monitoring
 The status of each container can be viewed with:
 ```bash
 sudo docker ps
+```
+ Docker compose logs can be inspected by running the following command from the project directory, containing the `docker-compose.yml` file.
+```bash
+sudo docker compose logs
 ```
 Which will output a list of all running containers
 ```
@@ -174,4 +154,4 @@ CONTAINER ID   IMAGE                   COMMAND                  CREATED        S
 51fb1a63d09f   wedding-website-flask   "gunicorn --bind 0.0…"   10 hours ago   Up 21 minutes                                       flask
 ```
 ### Restarting the Service
-The docker service will automatically attempt to restart unless it is explicitly stopped, via the `restart: unless-stopped` argument. So in the event of the droplet being rebooted, or the app crashing, the docker service will restart automatically without the need for manual intervention.
+If stopped for any reason, the Docker service will automatically attempt to restart unless it is explicitly stopped, via the `restart: unless-stopped` argument. So in the event of the droplet being rebooted, or the app crashing, the Docker service will restart automatically without the need for manual intervention.
