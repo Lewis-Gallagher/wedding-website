@@ -109,7 +109,7 @@ body {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.35);
 }
 
-.gmap {
+.grow {
   padding-top:50px;
   display: flex;
   justify-content: center;
@@ -126,7 +126,7 @@ body {
 }
 
 @media only screen and (max-width: 800px) {
-  .gmap {
+  .grow {
     width: 90%;
     height:auto;
   }
