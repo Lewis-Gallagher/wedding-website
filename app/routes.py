@@ -74,3 +74,7 @@ def event_info():
 @app.route('/faq')
 def faq():
     return render_template('faq.html', title = 'FAQ')
+
+@app.route('/photos')
+def photos():
+    return render_template('photos.html', title = 'Photos')

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content">
+    <div style="padding-top: 20px; padding-bottom: 20px;">
+        <h1 style="letter-spacing: 0.1em;">Share your photos with us!</h1>
+        <p style="letter-spacing: 0em;">Add your snaps to our Google drive album by scanning the QR code below or by <a href="https://photos.app.goo.gl/WYetrGejJBfK1o4z6" target="_blank">clicking here.</a></p>
+        <div class="grow">
+            <a href="https://photos.app.goo.gl/WYetrGejJBfK1o4z6"><img src="{{ url_for('static', filename='images/qr.png') }}" width="200"></a>
+        </div>
+    </div>
+</div>
+{%endblock content%}
